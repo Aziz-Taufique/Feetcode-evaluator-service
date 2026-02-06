@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint .",
-    "lintfix": "npx eslint . --fix",
-    "watch": "npx tsc --w",
+    "lint": "tsc lint .",
+    "prebuild": "npx eslint . --fix",
     "build": "npx tsc",
+    "watch": "npx tsc -w",
     "prestart": "npm run build",
     "start": "npx nodemon dist/index.js",
     "dev": "npx concurrently --kill-others \"npm run watch\" \"npm start\" "
@@ -28,6 +27,7 @@
   "dependencies": {
     "concurrently": "^9.2.1",
     "dotenv": "^17.2.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "express": "^5.2.1",
     "nodemon": "^3.1.11"
   }
