@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 
+import serverAdapter from "./config/bullMqDashboard";
 import serverConfig from "./config/serverConfig";
 import sampleProducer from "./prducers/sampleProducer";
 import apiRouter from "./routes";
@@ -7,10 +8,12 @@ import sampleWorker from "./workers/sampleWorker";
 
 const app: Express = express();
 
+app.use("/admin", serverAdapter.getRouter());
 app.use("/api", apiRouter);
 
 app.listen(serverConfig.PORT, () => {
     console.log(`Server is runnig at port ${serverConfig.PORT}`);
+    console.log("Visit http://localhost:3000/admin");
 
 
     sampleWorker("SampleQueue");
