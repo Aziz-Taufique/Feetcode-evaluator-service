@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import express, { Express } from "express";
 
 import serverAdapter from "./config/bullMqDashboard";
@@ -7,6 +8,9 @@ import apiRouter from "./routes";
 import sampleWorker from "./workers/sampleWorker";
 
 const app: Express = express();
+
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 app.use("/admin", serverAdapter.getRouter());
 app.use("/api", apiRouter);
