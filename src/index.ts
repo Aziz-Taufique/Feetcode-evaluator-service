@@ -3,9 +3,10 @@ import express, { Express } from "express";
 
 import serverAdapter from "./config/bullMqDashboard";
 import serverConfig from "./config/serverConfig";
-import sampleProducer from "./prducers/sampleProducer";
+import runPython from "./containers/runPythonDocker";
+// import sampleProducer from "./prducers/sampleProducer";
 import apiRouter from "./routes";
-import sampleWorker from "./workers/sampleWorker";
+// import sampleWorker from "./workers/sampleWorker";
 
 const app: Express = express();
 
@@ -20,20 +21,22 @@ app.listen(serverConfig.PORT, () => {
     console.log("Visit http://localhost:3000/admin");
 
 
-    sampleWorker("SampleQueue");
+    // sampleWorker("SampleQueue");
 
-    sampleProducer("SampleJob", {
-        id: 1,
-        name: "max",
-        age: 11,
-        calss: "B.tech",
-    }, 2);
+    // sampleProducer("SampleJob", {
+    //     id: 1,
+    //     name: "max",
+    //     age: 11,
+    //     calss: "B.tech",
+    // }, 2);
 
-    sampleProducer("SampleJob", {
-        id: 1,
-        name: "aziz",
-        age: 22,
-        calss: "B.tech",
-    }, 1);
+    // sampleProducer("SampleJob", {
+    //     id: 1,
+    //     name: "aziz",
+    //     age: 22,
+    //     calss: "B.tech",
+    // }, 1);
+
+    runPython("print('hello')");
 
 });
