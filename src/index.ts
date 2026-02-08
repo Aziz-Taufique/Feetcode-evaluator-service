@@ -37,6 +37,31 @@ app.listen(serverConfig.PORT, () => {
     //     calss: "B.tech",
     // }, 1);
 
-    runPython("print('hello')");
+    const code1 = `x = input()
+print("I am:", x.lower())
+print("I am in upper case:", x.upper())
+print("full name is", x + " Taufique")
+`;
+
+    const code2 = `
+x = input();
+print("Value of x is:", x);
+for i in range(int(x)):
+  print(i);
+`;
+    const code3 = `
+x = input();
+y = input();
+print("Value of x is:", x);
+print("Value of y is:", y);
+print("Sum of x and y is:", int(x) + int(y));
+print("diff of x and y is:", int(x) - int(y));
+print("prod of x and y is:", int(x) * int(y));
+
+`;
+
+    runPython(code1, "Aziz");
+    runPython(code2, "10");
+    runPython(code3, `2\n3`);
 
 });
