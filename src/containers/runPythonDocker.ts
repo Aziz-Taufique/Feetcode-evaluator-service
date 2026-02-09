@@ -1,4 +1,4 @@
-import { PYTHON_IMAGE } from "../config/constants";
+import { PYTHON_IMAGE } from "../utils/constants";
 import createContainer from "./containerFactory";
 import decodeDockerStream from "./dockerHelper";
 import pullImagFromDockerHub from "./pullImage";

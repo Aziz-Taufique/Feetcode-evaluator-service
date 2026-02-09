@@ -1,12 +1,11 @@
-import { CPP_IMAGE } from "../config/constants";
+import { CPP_IMAGE } from "../utils/constants";
 import createContainer from "./containerFactory";
 import decodeDockerStream from "./dockerHelper";
 import pullImagFromDockerHub from "./pullImage";
 
-
 async function runCpp(code: string, inputTestCase: string) {
 
-    console.log("creating a new python container");
+    console.log("creating a new cpp container");
 
     // pull image 
     await pullImagFromDockerHub(CPP_IMAGE);
@@ -32,20 +31,20 @@ async function runCpp(code: string, inputTestCase: string) {
         rawLogBuffer.push(chunk);
     });
 
-    await new Promise((res) => {
+    const response = await new Promise((res) => {
 
         logerStream?.on("end", () => {
             console.log(rawLogBuffer);
             const completedBuffer = Buffer.concat(rawLogBuffer);
             const decodedStream = decodeDockerStream(completedBuffer);
-            console.log(decodedStream);
-            console.log(decodedStream.stdout);
+            // console.log(decodedStream.stdout);
 
             res(decodedStream);
         });
     });
 
     await cppDockerContainer?.remove();
+    return response;
 }
 
 export default runCpp;

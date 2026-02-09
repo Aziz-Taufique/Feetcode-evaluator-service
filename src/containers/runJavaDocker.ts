@@ -1,4 +1,4 @@
-import { JAVA_IMAGE } from "../config/constants";
+import { JAVA_IMAGE } from "../utils/constants";
 import createContainer from "./containerFactory";
 import decodeDockerStream from "./dockerHelper";
 import pullImagFromDockerHub from "./pullImage";
@@ -32,7 +32,7 @@ async function runJava(code: string, inputTestCase: string) {
         rawLogBuffer.push(chunk);
     });
 
-    await new Promise((res) => {
+    const response = await new Promise((res) => {
 
         logerStream?.on("end", () => {
             console.log(rawLogBuffer);
@@ -46,6 +46,7 @@ async function runJava(code: string, inputTestCase: string) {
     });
 
     await javaDockerContainer?.remove();
+    return response;
 }
 
 export default runJava;

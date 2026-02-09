@@ -1,12 +1,14 @@
-import { DOCKER_STREAM_HEADER_SIZE } from "../config/constants";
 import DockerStreamOutput from "../types/dockerStreamOutput";
+import { DOCKER_STREAM_HEADER_SIZE } from "../utils/constants";
 
-export default function decodeDockerStream(buffer: Buffer) {
+
+
+export default function decodeDockerStream(buffer: Buffer): DockerStreamOutput {
     let offset = 0;
 
     const output: DockerStreamOutput = {
-        stdout: "",
-        stderr: "",
+        stdout: '',
+        stderr: ''
     };
 
     while (offset < buffer.length) {
@@ -18,14 +20,15 @@ export default function decodeDockerStream(buffer: Buffer) {
         offset += DOCKER_STREAM_HEADER_SIZE;
 
         if (typeOfStream === 1) {
-            //stdout stream
-            output.stdout += buffer.toString("utf-8", offset, offset + length);
+            // stdout stream
+            output.stdout += buffer.toString('utf-8', offset, offset + length);
         } else if (typeOfStream === 2) {
-            //stderr stream
-            output.stderr += buffer.toString("utf-8", offset, offset + length);
+            // stderr stream
+            output.stderr += buffer.toString('utf-8', offset, offset + length);
         }
 
         offset += length;
     }
+
     return output;
 }
