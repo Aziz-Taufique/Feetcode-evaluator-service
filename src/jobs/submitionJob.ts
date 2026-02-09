@@ -15,19 +15,6 @@ export default class SubmitionJob implements IJob {
         this.payload = payload;
     }
 
-    // handle = async (job?: Job) => {
-    //     console.log("Handler of job called.");
-    //     console.log(this.payload);
-    //     if (job) {
-    //         const key = Object.keys(this.payload);
-    //         console.log(this.payload[key].language);
-    //         if (this.payload[key].language === "CPP") {
-    //             const response = await runCpp(this.payload[key].code, this.payload[key].inputCode);
-
-    //             console.log("FFFFF", response);
-    //         }
-    //     }
-    // };
     handle = async (job?: Job) => {
         console.log("Handler of job called.");
         console.log(this.payload);
